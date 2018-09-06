@@ -127,6 +127,9 @@ import SystemConfiguration
         self.frame = frame
         
         self.reachability = NetworkReachabilityManager(host: StatusBarOverlay.host)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.networkStatusChanged(self.reachability!.networkReachabilityStatus, animated: true)
+        }
         self.reachability?.listener = {(status: NetworkReachabilityManager.NetworkReachabilityStatus) -> () in
             self.networkStatusChanged(status, animated: true)
         }
